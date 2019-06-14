@@ -1,0 +1,12 @@
+﻿@model BudgetCalculatorFrontEnd.Models.UsersModel
+
+<a href="@Url.Action("Index", "Home")">
+    <i class="zmdi zmdi-balance-wallet"> Home</i>
+</a>
+
+<form method="post">
+    @Html.ValidationSummary(false)
+    @Html.LabelFor(p => p.Email)
+    @Html.TextBoxFor(p => p.Email)
+    <button type="submit">Create</button>
+</form>

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BudgetCalculatorFrontEnd.Models.ViewModel.TransactionViewModel>
+
+<div class="row panel panel-success" style="margin-top:2%;">
+    <div class="panel-heading lead">
+        <div class="row">
+            <div class="col-lg-8 col-md-8"><i class="fa fa-users"></i>Transactions</div>
+            <div class="col-lg-4 col-md-4 text-right">
+
+            </div>
+        </div>
+    </div>
+</div>
+@if (!Model.Any())
+{
+    <p>No Transaction </p>
+}
+
+<div style="padding-right:200px" class="panel-body">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-9 col-md-9">
+                    <ul class="nav nav-tabs">
+                        <li><a href="@Url.Action("Edit", "Transaction", new { id = item.Id, houseHoldId = ViewBag.houseHoldId })" class="text-success"><i class="fa fa-indent"></i>Edit Transaction</a></li>
+                        <li><a href="@Url.Action("Delete", "Transaction", new { id = item.Id })" class="text-success"><i class="fa fa-bookmark-o"></i>Delete Transaction</a></li>
+                        @if (item.IsVoided == false)
+                        {
+                            <form method="post" action="@Url.Action("Void", "Transaction", new { Id = item.Id })">
+                                <button class="text-success fa fa-home" type="submit">Void</button>
+                            </form>
+                        }
+
+                        @*<li><a href="@Url.Action("Create", "Transaction", new { id = ViewBag.Id, bankAccountId = item.Id })" class="text-success"><i class="fa fa-home"></i>Void</a></li>*@
+                        @*<li><a href="#General" class="text-success"><i class="fa fa-info"></i> General Info</a></li>*@
+                    </ul>
+                    <div class="tab-content">
+                        <div id="Summery" class="tab-pane fade in active">
+
+                            <div class="table-responsive panel">
+                                <table class="table">
+                                    <tbody>
+
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-user"></i> Name:</td>
+                                            <td>@item.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-list-ol"></i>Description</td>
+                                            <td>@item.Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-book"></i>DateCreated</td>
+                                            <td>@item.DateCreated</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-group"></i> DateUpdated</td>
+                                            <td>@item.DateUpdated</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-group"></i>Balance</td>
+                                            <td>@item.Amount</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-group"></i>Transaction Date</td>
+                                            <td>@item.TransactionDate</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

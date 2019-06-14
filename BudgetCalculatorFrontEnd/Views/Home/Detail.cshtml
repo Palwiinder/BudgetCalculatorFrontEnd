@@ -1,0 +1,68 @@
+﻿@model BudgetCalculatorFrontEnd.Models.HouseHoldViewModel
+
+<div class="row panel panel-success" style="margin-top:2%;">
+    <div class="panel-heading lead">
+        <div class="row">
+            <div class="col-lg-8 col-md-8"><i class="fa fa-users"></i>HouseHold</div>
+            <div class="col-lg-4 col-md-4 text-right">
+                <div class="btn-group text-center">
+                    <a href="@Url.Action("Household", "Home")" class="btn btn-success btn-sm btn-default">Back To List<i class="fa fa-eye fa-1x"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="padding-right:200px" class="panel-body">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+
+            <div class="col-lg-9 col-md-9">
+                @if (Model.IsOwner)
+                {
+
+                    <ul class="nav nav-tabs">
+                        <li><a href="@Url.Action("Create", "Category" ,new { id = Model.Id })" class="text-success"><i class="fa fa-indent"></i>Add Category</a></li>
+                        <li><a href="@Url.Action("Create", "BankAccount" ,new { id = Model.Id })" class="text-success"><i class="fa fa-bookmark-o"></i>Add Bank Account</a></li>
+                        <li><a href="@Url.Action("Invite", "Home", new { id = Model.Id })" class="text-success"><i class="fa fa-home"></i>Invite Users</a></li>
+                        <li><a href="#General" class="text-success"><i class="fa fa-info"></i> General Info</a></li>
+                    </ul>
+                }
+
+                <div class="tab-content">
+                    <div id="Summery" class="tab-pane fade in active">
+
+                        <div class="table-responsive panel">
+                            <table class="table">
+                                <tbody>
+
+                                    <tr>
+                                        <td class="text-success"><i class="fa fa-user"></i> Name:</td>
+                                        <td>@Model.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-success"><i class="fa fa-list-ol"></i>Description</td>
+                                        <td>@Model.Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-success"><i class="fa fa-book"></i>DateCreated</td>
+                                        <td>@Model.DateCreated</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-success"><i class="fa fa-group"></i> DateUpdated</td>
+                                        <td>@Model.DateUpdated</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <ul class="nav nav-tabs">
+                    <li><a href="@Url.Action("Category", "Category" ,new { id = Model.Id })" class="text-success"><i class="fa fa-indent"></i>View Categories</a></li>
+                    <li><a href="@Url.Action("BankAccount", "BankAccount" ,new { id = Model.Id@*, houseHoldId = Model.Id*@ })" class="text-success"><i class="fa fa-bookmark-o"></i>View Bank Accounts</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

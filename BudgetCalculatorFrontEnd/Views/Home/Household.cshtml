@@ -1,0 +1,76 @@
+﻿@model List<BudgetCalculatorFrontEnd.Models.HouseHoldViewModel>
+
+
+<div>
+    <section id="main-content">
+        <section class="wrapper site-min-height">
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Date Created</th>
+                                <th>Date Updaeted</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateUpdated)
+                                    </td>
+                                    <td>
+                                        @if (item.IsOwner)
+                                        {
+
+                                            <a class="au-btn au-btn-icon au-btn--blue" href="@Url.Action("Edit", "Home", new { id = item.Id })">
+                                                <i class="glyphicon glyphicon-tasks"></i>
+                                                Edit
+                                            </a>
+                                        <td>
+                                            <form method="post" action="@Url.Action("Delete", "Home", new { id = item.Id })">
+                                                <button class="glyphicon glyphicon-tasks" style="background:none; border:none; color:#428bca" type="submit">Delete</button>
+                                            </form>
+
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        @Html.ActionLink("ViewUsers", "ViewUsers", new { id = item.Id })
+                                        <a href="@Url.Action("Join", "Home", new { id = item.Id })">Join</a>
+                                        <form method="post" action="@Url.Action("Leave", "Home", new { id = item.Id })">
+                                            <button type="submit">Leave</button>
+                                        </form>
+                                    }
+                                    
+                                        <td>
+                                            <a class="au-btn au-btn-icon au-btn--blue" href="@Url.Action("Detail", "Home" ,new { id = item.Id })">
+                                                <i class="glyphicon glyphicon-tasks"></i>
+                                                Detail
+                                            </a>
+                                        </td>
+
+                                    </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- /wrapper -->
+    </section>
+</div>

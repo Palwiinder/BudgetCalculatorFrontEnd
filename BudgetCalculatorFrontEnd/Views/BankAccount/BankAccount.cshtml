@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BudgetCalculatorFrontEnd.Models.ViewModel.BankAccountViewModel>
+
+<div class="row panel panel-success" style="margin-top:2%;">
+    <div class="panel-heading lead">
+        <div class="row">
+            <div class="col-lg-8 col-md-8"><i class="fa fa-users"></i>Bank Accounts</div>
+            <div class="col-lg-4 col-md-4 text-right">
+
+            </div>
+        </div>
+    </div>
+</div>
+@if (!Model.Any())
+{
+    <p>No Bank Account</p>
+}
+
+<div style="padding-right:200px" class="panel-body">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-9 col-md-9">
+
+                    <ul class="nav nav-tabs">
+                        <li><a href="@Url.Action("Edit", "BankAccount", new { id = item.Id })" class="text-success"><i class="fa fa-indent"></i>Edit BankAccount</a></li>
+                        <li><a href="@Url.Action("Delete", "BankAccount", new { id = item.Id })" class="text-success"><i class="fa fa-bookmark-o"></i>Delete BankAccount</a></li>
+                    </ul>
+
+                    <ul class="nav nav-tabs">
+                        <li><a href="@Url.Action("Create", "Transaction", new { id = ViewBag.id, bankAccountId = item.Id })" class="text-success"><i class="fa fa-home"></i>Create Transaction</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="Summery" class="tab-pane fade in active">
+
+                            <div class="table-responsive panel">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-user"></i> Name:</td>
+                                            <td>@item.Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-list-ol"></i>Description</td>
+                                            <td>@item.Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-book"></i>DateCreated</td>
+                                            <td>@item.DateCreated</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-group"></i> DateUpdated</td>
+                                            <td>@item.DateUpdated</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success"><i class="fa fa-group"></i>Balance</td>
+                                            <td>@item.Balance</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href=" @Url.Action("Transaction", "Transaction", new { id = item.Id, houseHoldId = ViewBag.id })" class="text-success"><i class="fa fa-info"></i>View Transactions</a>
+                                            </td>
+                                            @if (item.IsOwner)
+                                            {
+                                                <td>
+                                                    <a href=" @Url.Action("CalculateBalance", "BankAccount", new { id = item.Id, houseHoldId = item.HouseholdId })" class="text-success"><i class="fa fa-info"></i> Calculate Balance</a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+
